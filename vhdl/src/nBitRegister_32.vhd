@@ -14,7 +14,7 @@ entity nBitRegister_32 is
 end nBitRegister_32;
 
 
-architecture behav of nBitRegister_32 is
+architecture logic of nBitRegister_32 is
 
 
 begin
@@ -33,7 +33,7 @@ begin
 
 
 
-end behav;
+end logic;
 
 
 

@@ -15,7 +15,7 @@ entity nVCControl is
 end nVCControl;
 
 
-architecture behav of nVCControl is
+architecture logic of nVCControl is
 
 
 begin
@@ -71,7 +71,7 @@ begin
 
 
 
-end behav;
+end logic;
 
 
 
