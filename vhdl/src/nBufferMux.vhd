@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 --Muxes the buffers, selecting one to go to output
-entity nRouterMux is
+entity nBufferMux is
     generic (n : integer  := 10);
     Port (
         --General inputs
@@ -16,10 +16,10 @@ entity nRouterMux is
         --Mux outputs
         muxOut : out std_logic_vector(n-1 downto 0) -- 1 output , n bits wide
     );
-end nRouterMux;
+end nBufferMux;
 
 
-architecture logic of nRouterMux is
+architecture logic of nBufferMux is
 
 begin
 
