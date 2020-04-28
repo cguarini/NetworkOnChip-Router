@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 --Muxes the buffers, selecting one to go to output
-entity nBufferMux is
+entity BufferDemux is
     generic (n : integer  := 10);
     Port (
         --General inputs
@@ -16,10 +16,10 @@ entity nBufferMux is
         eastTx   : out std_logic_vector(n-1 downto 0); -- east buffer
         westTx   : out std_logic_vector(n-1 downto 0)  -- west buffer
     );
-end nBufferMux;
+end BufferDemux;
 
 
-architecture logic of nBufferMux is
+architecture logic of BufferDemux is
 
 begin
 
