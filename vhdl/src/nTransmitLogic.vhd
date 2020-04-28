@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 --Muxes the buffers, selecting one to go to output
-entity nCrossbar is
+entity nTransmitLogic is
     generic (n : integer  := 10);
     Port (
         --inputs
@@ -13,10 +13,10 @@ entity nCrossbar is
         transmit: out std_logic; -- Transmit this signal
         nFlitOut : out std_logic_vector(n-1 downto 0) -- Flit signal
     );
-end nCrossbar;
+end nTransmitLogic;
 
 
-architecture logic of nCrossbar is
+architecture logic of nTransmitLogic is
 
 begin
     

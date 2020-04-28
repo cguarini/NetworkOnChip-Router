@@ -11,7 +11,7 @@ entity nRouterLUT is
         reset : in std_logic;
         clk : in std_logic;
         --outputs
-        portSel: out std_logic; --Which port to route the packet to
+        portSel: out std_logic_vector(2 downto 0); --Which port to route the packet to
         nFlitOut : out std_logic_vector(n-1 downto 0) -- Flit signal
     );
 end nRouterLUT;
