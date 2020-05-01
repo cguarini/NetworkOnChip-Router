@@ -66,7 +66,8 @@ begin
     --Entry register
     Reg0 : nBitRegister_32
     generic map( n => 10)
-    port map(nBitIn => reg0In,
+    port map(
+        nBitIn => reg0In,
         WE => flush, 
         clk => clk, 
         reset => reset, 
@@ -76,7 +77,8 @@ begin
     --Middle register
     Reg1 : nBitRegister_32
     generic map( n => 10)
-    port map(nBitIn => reg0Out,
+    port map(
+        nBitIn => reg0Out,
         WE => flush, 
         clk => clk, 
         reset => reset, 
@@ -84,9 +86,10 @@ begin
     );
 
     --Output register
-    Reg1 : nBitRegister_32
+    Reg2 : nBitRegister_32
     generic map( n => 10)
-    port map(nBitIn => reg1Out,
+    port map(
+        nBitIn => reg1Out,
         WE => flush, 
         clk => clk, 
         reset => reset, 

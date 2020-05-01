@@ -1,7 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
---Muxes the buffers, selecting one to go to output
+--Sends a transmit signal to one of the buffers
 entity BufferDemux is
     generic (n : integer  := 10);
     Port (
@@ -9,12 +9,12 @@ entity BufferDemux is
         buffSel : in std_logic_vector(2 downto 0); -- Select the buffer
         transmit : in std_logic; -- transmit signal
 
-        --Demux outputs, transmit to each buffer
-        localTx  : out std_logic_vector(n-1 downto 0); -- local buffer
-        northTx  : out std_logic_vector(n-1 downto 0); -- north buffer
-        southTx  : out std_logic_vector(n-1 downto 0); -- south buffer
-        eastTx   : out std_logic_vector(n-1 downto 0); -- east buffer
-        westTx   : out std_logic_vector(n-1 downto 0)  -- west buffer
+        --Demux outputs, sending transmit to each buffer
+        localTx  : out std_logic; -- local buffer
+        northTx  : out std_logic; -- north buffer
+        southTx  : out std_logic; -- south buffer
+        eastTx   : out std_logic; -- east buffer
+        westTx   : out std_logic  -- west buffer
     );
 end BufferDemux;
 

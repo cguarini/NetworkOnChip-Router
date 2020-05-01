@@ -18,20 +18,21 @@ end nTransmitLogic;
 
 architecture logic of nTransmitLogic is
 
+    signal tx : std_logic;
 begin
     
     transmitProc : process (clk, reset) begin
         if reset = '0' then
-            transmit <= '0';
+            tx <= '0';
         elsif clk'event and clk = '1' then
             if nFlitIn(1 downto 0) = "11" then
                 --header flit, transmit this
-                transmit <= '1';
+                tx <= '1';
             elsif nFlitIn(1 downto 0) = "01" then
                 --tail flit, stop transmitting
-                transmit <= '0';
+                tx <= '0';
             else
-                transmit <= transmit;
+                tx <= tx;
             end if;
         end if;
     end process transmitProc;
@@ -43,6 +44,9 @@ begin
             nFlitOut <= nFlitIn;
         end if;
     end process flitOutProc;
+
+    --Assign output
+    transmit <= tx;
 
 end logic;
 

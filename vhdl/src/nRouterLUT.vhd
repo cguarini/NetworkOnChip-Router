@@ -19,9 +19,12 @@ end nRouterLUT;
 
 architecture logic of nRouterLUT is
 
-    signal routerRank <= nFlitIn(4 downto 2);
+    signal routerRank : std_logic_vector(2 downto 0);
 
 begin
+
+    --Double check, may not work
+    routerRank <= nFlitIn(4 downto 2);
 
     --Lookup the destination rank and set the portSel signal
     lookupProc : process (clk, reset) begin
@@ -46,7 +49,7 @@ begin
     end process lookupProc;
 
     --Clock the flit out
-    lookupProc : process (clk, reset) begin
+    outputProc : process (clk, reset) begin
         if reset = '0' then
             nFlitOut <= (others => '0'); 
         elsif clk'event and clk = '1' then
@@ -56,7 +59,7 @@ begin
                 nFlitOut <= (others => '0');
             end if;
         end if;
-    end process lookupProc;
+    end process outputProc;
 
 end logic;
 

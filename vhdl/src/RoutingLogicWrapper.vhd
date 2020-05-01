@@ -99,7 +99,7 @@ begin
     );
 
     LUT0 : nRouterLut
-    generic map (n => 10);
+    generic map (n => 10)
     port map (
         nFlitIn => txFlitOut,
         transmit => tx,
@@ -107,7 +107,7 @@ begin
         clk => clk,
         portSel => portSel,
         nFlitOut => nFlitOut
-    )
+    );
     
 
 end struct;

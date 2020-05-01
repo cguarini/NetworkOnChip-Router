@@ -9,7 +9,12 @@ entity BufferWrapper is
         transmit: in std_logic; -- Active high write enable
         reset   : in std_logic; -- Async reset, disabled when low
         clk     : in std_logic;
-        full : out std_logic;
+        --buffer flit inputs
+        localIn : in std_logic_vector(n-1 downto 0);
+        northIn : in std_logic_vector(n-1 downto 0);
+        southIn : in std_logic_vector(n-1 downto 0);
+        eastIn : in std_logic_vector(n-1 downto 0);
+        westIn : in std_logic_vector(n-1 downto 0);
         nBufferOut: out std_logic_vector(n-1 downto 0) -- 1 output , n bits wide
     );
 end BufferWrapper;
@@ -25,12 +30,6 @@ architecture struct of BufferWrapper is
             transmit: in std_logic; -- Active high write enable
             reset   : in std_logic; -- Async reset, disabled when low
             clk     : in std_logic;
-            --buffer flit inputs
-            localIn : in std_logic_vector(n-1 downto 0);
-            northIn : in std_logic_vector(n-1 downto 0);
-            southIn : in std_logic_vector(n-1 downto 0);
-            eastIn : in std_logic_vector(n-1 downto 0);
-            westIn : in std_logic_vector(n-1 downto 0);
             full : out std_logic;
             nFlitOut: out std_logic_vector(n-1 downto 0) -- 1 output , n bits wide
         );
@@ -60,14 +59,14 @@ architecture struct of BufferWrapper is
             transmit : in std_logic; -- transmit signal
     
             --Demux outputs, transmit to each buffer
-            localTx  : out std_logic_vector(n-1 downto 0); -- local buffer
-            northTx  : out std_logic_vector(n-1 downto 0); -- north buffer
-            southTx  : out std_logic_vector(n-1 downto 0); -- south buffer
-            eastTx   : out std_logic_vector(n-1 downto 0); -- east buffer
-            westTx   : out std_logic_vector(n-1 downto 0)  -- west buffer
+            localTx  : out std_logic; -- local buffer
+            northTx  : out std_logic; -- north buffer
+            southTx  : out std_logic; -- south buffer
+            eastTx   : out std_logic; -- east buffer
+            westTx   : out std_logic  -- west buffer
         );
     end component;
-    
+
     --SIGNAL DECLARATIONS
 
     --buffer flit outputs
