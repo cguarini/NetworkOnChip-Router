@@ -97,16 +97,27 @@ begin
     reset <= '0';
     --Header packet, send to local
     localIn <= "0000000011";
+    southIn <= "0000000111";
     wait for 100 ns;
     reset <= '1';
     wait for 100 ns;
     --Body packet, 'H'
     localIn <= "0100100010";
+    southIn <= "0100111110";
     wait for 100 ns;
     --Tail packet, 'E'
     localIn <= "0100010101";
+    southIn <= "0010000001";
     wait for 100 ns;
     localIn <= (others => '0');
+    northIn <= "0000001011";
+    wait for 100 ns;
+    northIn <= "0100110010";
+    wait for 100 ns;
+    northIn <= "0100110001";
+    wait for 100 ns;
+    northIn <= (others => '0');
+
 
     wait;
   end process;

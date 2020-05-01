@@ -106,6 +106,9 @@ begin
         portSel => portSel,
         nFlitOut => nFlitOut
     );
+
+    --assign outputs
+    transmit <= tx;
     
 
 end struct;
