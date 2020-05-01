@@ -8,9 +8,7 @@ entity nCrossbar is
         --inputs
         nFlitIn : in std_logic_vector(n-1 downto 0); -- n bits to store in the register
         portSel : in std_logic_vector(2 downto 0); -- Which port to route packet to, from LUT
-        reset   : in std_logic; -- Async reset, active low
-        clk     : in std_logic;
-        transmit: in std_logic; -- Transmit this signal
+
         --outputs
         localOut: out std_logic_vector(n-1 downto 0); -- local output
         northOut: out std_logic_vector(n-1 downto 0); -- north output
@@ -26,77 +24,63 @@ architecture logic of nCrossbar is
 begin
     
     --Sets output to input if this port is selected, otherwise 0
-    localProc : process (clk, reset) begin
+    localProc : process (portSel, nFlitIn) begin
 
-        if reset = '0' then
+        if portSel = "000" then
+            localOut <= nFlitIn;
+        else
             localOut <= (others => '0');
-        elsif clk'event and clk = '1' then
-            if portSel = "000" and transmit = '1' then
-                localOut <= nFlitIn;
-            else
-                localOut <= (others => '0');
-            end if;
         end if;
 
     end process localProc;
 
     --Sets output to input if this port is selected, otherwise 0
-    northProc : process (clk, reset) begin
+    northProc : process (portSel, nFlitIn) begin
 
-        if reset = '0' then
+
+        if portSel = "001" then
+            northOut <= nFlitIn;
+        else
             northOut <= (others => '0');
-        elsif clk'event and clk = '1' then
-            if portSel = "001" and transmit = '1' then
-                northOut <= nFlitIn;
-            else
-                northOut <= (others => '0');
-            end if;
         end if;
+
 
     end process northProc;
 
     --Sets output to input if this port is selected, otherwise 0
-    southProc : process (clk, reset) begin
+    southProc : process (portSel, nFlitIn) begin
 
-        if reset = '0' then
+
+        if portSel = "010" then
+            southOut <= nFlitIn;
+        else
             southOut <= (others => '0');
-        elsif clk'event and clk = '1' then
-            if portSel = "010" and transmit = '1' then
-                southOut <= nFlitIn;
-            else
-                southOut <= (others => '0');
-            end if;
         end if;
+
 
     end process southProc;
 
     --Sets output to input if this port is selected, otherwise 0
-    eastProc : process (clk, reset) begin
+    eastProc : process (portSel, nFlitIn) begin
 
-        if reset = '0' then
+        if portSel = "011" then
+            eastOut <= nFlitIn;
+        else
             eastOut <= (others => '0');
-        elsif clk'event and clk = '1' then
-            if portSel = "011" and transmit = '1' then
-                eastOut <= nFlitIn;
-            else
-            eastOut <= (others => '0');
-            end if;
         end if;
+
 
     end process eastProc;
 
     --Sets output to input if this port is selected, otherwise 0
-    westProc : process (clk, reset) begin
+    westProc : process (portSel, nFlitIn) begin
 
-        if reset = '0' then
+        if portSel = "100" then
+            westOut <= nFlitIn;
+        else
             westOut <= (others => '0');
-        elsif clk'event and clk = '1' then
-            if portSel = "100" and transmit = '1' then
-                westOut <= nFlitIn;
-            else
-            westOut <= (others => '0');
-            end if;
         end if;
+
 
     end process westProc;
 

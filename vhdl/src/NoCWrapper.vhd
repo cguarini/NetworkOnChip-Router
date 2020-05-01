@@ -5,8 +5,6 @@ use ieee.std_logic_1164.all;
 entity NoCWrapper is
     generic (n : integer  := 10);
     Port (
-        nFlitIn : in std_logic_vector(n-1 downto 0); -- n bits to store in the register
-        transmit: in std_logic; -- Active high write enable
         reset   : in std_logic; -- Async reset, disabled when low
         clk     : in std_logic;
         --buffer flit inputs
@@ -34,9 +32,6 @@ architecture struct of NoCWrapper is
             --inputs
             nFlitIn : in std_logic_vector(n-1 downto 0); -- n bits to store in the register
             portSel : in std_logic_vector(2 downto 0); -- Which port to route packet to, from LUT
-            reset   : in std_logic; -- Async reset, active low
-            clk     : in std_logic;
-            transmit: in std_logic; -- Transmit this signal
             --outputs
             localOut: out std_logic_vector(n-1 downto 0); -- local output
             northOut: out std_logic_vector(n-1 downto 0); -- north output
@@ -122,9 +117,6 @@ begin
     port map(
         nFlitIn => routingOutput,
         portSel => portSelect,
-        reset => reset,
-        clk => clk,
-        transmit => tx,
         localOut => localOut,
         northOut => northOut,
         southOut => southOut,

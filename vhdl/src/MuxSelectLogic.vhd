@@ -25,7 +25,7 @@ begin
     count_proc : process (clk, reset) begin
 
         if reset = '0' then
-            buffSel <= (others => '0');
+            count <= (others => '0');
         elsif clk'event and clk = '1' then
             if enable = '1' then
                 if count = "000" then

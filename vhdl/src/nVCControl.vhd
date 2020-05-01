@@ -20,25 +20,19 @@ architecture logic of nVCControl is
 
 begin
 
-    flushProc : process (clk, reset) begin
+    flushProc : process (transmit, topFlit) begin
 
-        if reset = '0' then
-            --Reset, no need to flush
-            flushFlits <= '0';
-        elsif clk'event and clk = '1' then
-            --rising clock edge
-            if transmit = '1' then
-                --Transmit all flits to router
+        if transmit = '1' then
+            --Transmit all flits to router
+            flushFlits <= '1';
+        elsif transmit = '0' then
+            --We're not transmitting, get the header to the top flit
+            if topFlit(1 downto 0) = "11" then
+                --Header is at the top flit, stop flushing
+                flushFlits <= '0';
+            else
+                --keep flishing until header is at top flit
                 flushFlits <= '1';
-            elsif transmit = '0' then
-                --We're not transmitting, get the header to the top flit
-                if topFlit(1 downto 0) = "11" then
-                    --Header is at the top flit, stop flushing
-                    flushFlits <= '0';
-                else
-                    --keep flishing until header is at top flit
-                    flushFlits <= '1';
-                end if;
             end if;
         end if;
 

@@ -57,7 +57,6 @@ architecture struct of RoutingLogicWrapper is
         Port (
             --inputs
             nFlitIn : in std_logic_vector(n-1 downto 0); -- n bits to store in the register
-            transmit : in std_logic;
             reset : in std_logic;
             clk : in std_logic;
             --outputs
@@ -102,7 +101,6 @@ begin
     generic map (n => 10)
     port map (
         nFlitIn => txFlitOut,
-        transmit => tx,
         reset => reset,
         clk => clk,
         portSel => portSel,
